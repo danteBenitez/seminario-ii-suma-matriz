@@ -9,16 +9,16 @@ export function matrixAdd(req, res) {
         }
 
         const [matrix1, matrix2] = values;
-
-        if (matrix1.length == matrix2.length) {
+        console.log(matrix1, matrix2);
+        if (matrix1.length != matrix2.length) {
             throw {
                 status: 400,
-                message: 'La suma requiere que las matrices tengan la misma cantidad' +
+                message: 'La suma requiere que las matrices tengan la misma cantidad ' +
                          'de filas'
             }
         }
 
-        if (matrix1[0].length == matrix2[0].length) {
+        if (matrix1[0].length != matrix2[0].length) {
             throw {
                 status: 400,
                 message: 'La suma requiere que las matrices tengan la misma cantidad' +

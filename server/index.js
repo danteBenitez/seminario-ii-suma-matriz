@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(express.static(FILE_SERVER_PATH));
 
-app.use(matrixRouter);
+app.use('/api/matrix', matrixRouter);
 
 app.listen(8000, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`)

@@ -1,7 +1,7 @@
 export const arrayWithLength = (length) => new Array(length).fill(0);
 
 export const emptyMatrix = (rows, columns) =>
-  emptyMatrix(rows).map((_) => emptyMatrix(columns));
+  arrayWithLength(rows).map((_) => arrayWithLength(columns));
 
 export function addMatrix(matrix1, matrix2) {
     const rows = matrix1.length;
