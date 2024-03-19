@@ -2,6 +2,7 @@
 const rowInput = document.querySelector("input[name=rows]");
 const columnInput = document.querySelector("input[name=columns]");
 const [matrixContainer1, matrixContainer2] = document.querySelectorAll("[data-id=matrix]");
+const resultMatrix = document.querySelector("[data-id=matrix-result]");
 const sendButton = document.querySelector("#send-btn");
 const appState = {
     selectedRows: 10,
@@ -136,11 +137,23 @@ sendButton.addEventListener("click", async () => {
             })
         });
 
-        console.log(await response.json());
+        const { result } = await response.json();
+        
+        resultMatrix.innerHTML += '';
+
+        resultMatrix.append(generateMatrix(1, matrix1Values.length, matrix1Values[0].length));
+
+        const cells = resultMatrix.querySelectorAll("[data-cell]");
+        console.log(cells);
+        for (const cell of cells) {
+            const [_, row, column] = cell.getAttribute("data-cell").split('-');
+            console.log(row, column);
+            // @ts-ignore
+            cell.value = result[parseInt(row)][parseInt(column)];
+        }
 
     } catch(err) {
         throw err;
     }
-
 });
 
