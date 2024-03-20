@@ -15,6 +15,23 @@
     min-width: 4rem;
 }
 
+#error-message {
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#error-message p {
+    color: red;
+    width: clamp(10rem, 50%, 20rem);
+    background-color: #f8d7da;
+    border-color: #f5828e;
+    padding: 0.75rem 1.25rem;
+}
+
 [name=cell] {
     min-width: 2rem;
 }

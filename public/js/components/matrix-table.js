@@ -14,14 +14,11 @@ export function Matrix(rows, columns, renderCell) {
     const element = document.createElement("div");
     /** @type {number[][]} */
     const matrix = emptyMatrix(rows, columns);
-    console.log("empty Matrix: ", matrix);
     const cellRows = matrix.map((row, rowNumber) => row.map((_, columnNumber) => {
         return renderCell(rowNumber, columnNumber);
     }));
 
-    console.log("cellRows: ", cellRows);
     const cellRowElements = cellRows.map(cellRow => cellRow.map(cell => cell.innerHTML).join('')).join('');
-    console.log("cellRowElements: ", cellRowElements);
     const div = document.createElement("div");
 
     div.classList.add("d-grid", "gap-2");
@@ -31,6 +28,5 @@ export function Matrix(rows, columns, renderCell) {
 
     element.append(div);
 
-    console.log("element.innerHTML: ", element.innerHTML);
     return element;
 }
