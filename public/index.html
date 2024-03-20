@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de matrices</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="./matrix.js" defer></script>
+    <script src="./js/matrix.js" type="module" defer></script>
     <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
     <main class="">
-       <hgroup class="d-flex justify-content-center flex-column bg-black text-white">
-         <h1 class="text-center">Calculadora de matrices</h1>
+       <hgroup class="d-flex justify-content-center flex-column bg-black text-white p-2">
+         <h1 class="text-center fw-bold">Calculadora de matrices</h1>
          <h2 class="text-center">Suma</h2>
        </hgroup> 
        <section class="fs-5 p-4">
@@ -23,18 +23,18 @@
                 </div>
                 <div class="w-50">
                     <label for="columns" class="form-label">Ingresa la cantidad de columnas: </label>
-                    <input type="number" name="columns" class="form-control" value="10"/>
+                    <input type="number" name="columns" class="form-control" value="10" />
                 </div>
             </fieldset>
         </form>
         <article class="d-flex gap-2 p-1">
-            <div class="w-50">
-                <h6 class="text-info-emphasis fs-2">Matriz 1</h6>
-                <div data-id="matrix" class=""></div>
+            <div class="w-50 border border-1 p-3">
+                <h6 class="text-info-emphasis fs-2 text-center">Matriz 1</h6>
+                <div data-id="matrix" class="d-flex justify-content-center"></div>
             </div>
-            <div class="w-50">
-                <h6 class="text-info-emphasis fs-2">Matriz 2</h6>
-                <div data-id="matrix" class=""></div>
+            <div class="w-50 border border-1 p-3">
+                <h6 class="text-info-emphasis fs-2 text-center">Matriz 2</h6>
+                <div data-id="matrix" class="d-flex justify-content-center"></div>
             </div>
         </article>
         <div>
@@ -43,8 +43,9 @@
             </div>
         </div>
         <article>
-            <div>
-                <div data-id="matrix-result"></div>
+            <div class="p-5 border border-1">
+                <h6 class="text-info-emphasis fs-2 text-center">Matriz resultado</h6>
+                <div data-id="matrix-result" class="d-flex overflow-scroll"></div>
             </div>
         </article>
        </section>

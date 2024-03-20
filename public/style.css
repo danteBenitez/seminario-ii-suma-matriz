@@ -1,4 +1,20 @@
+[data-id=matrix] {
+    max-width: 50vw;
+    overflow-x: scroll;
+}
 
-td input {
-    max-width: 2rem;
+.d-grid {
+    overflow: scroll;
+}
+
+.result-cell {
+    min-width: 2rem;
+}
+
+.result-cell p {
+    min-width: 4rem;
+}
+
+[name=cell] {
+    min-width: 2rem;
 }

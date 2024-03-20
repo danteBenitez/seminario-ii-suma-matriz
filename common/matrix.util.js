@@ -7,6 +7,7 @@ export function addMatrix(matrix1, matrix2) {
     const rows = matrix1.length;
     const columns = matrix1[0].length;
     const result = emptyMatrix(rows, columns);
+
     for (let rowNumber = 0; rowNumber < rows; rowNumber++) {
         for (let colNumber = 0; colNumber < columns; colNumber++) {
             const elem1 = matrix1[rowNumber][colNumber];

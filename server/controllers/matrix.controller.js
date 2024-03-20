@@ -1,4 +1,4 @@
-import { addMatrix } from "../utils/matrix.js";
+import { addMatrix } from "../../common/matrix.util.js";
 
 export function matrixAdd(req, res) {
     const { values } = req.body;

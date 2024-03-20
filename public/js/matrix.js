@@ -1,29 +1,17 @@
 // @ts-check
+import { arrayWithLength, emptyMatrix } from "/matrix.util.js";
+import { Matrix } from './components/matrix-table.js';
+
 const rowInput = document.querySelector("input[name=rows]");
 const columnInput = document.querySelector("input[name=columns]");
 const [matrixContainer1, matrixContainer2] = document.querySelectorAll("[data-id=matrix]");
-const resultMatrix = document.querySelector("[data-id=matrix-result]");
+const resultMatrixContainer = document.querySelector("[data-id=matrix-result]");
 const sendButton = document.querySelector("#send-btn");
+
 const appState = {
-    selectedRows: 10,
-    selectedColumns: 10
+    selectedRows: parseInt(rowInput.value) || 10,
+    selectedColumns: parseInt(columnInput.value) || 10
 };
-
-/**
- * Retorna un nuevo array relleno con ceros con el largo especificado.
- * @param {number} length
- * @returns {Array<number>}
- */
-const arrayWithLength = (length) => new Array(length).fill(0);
-
-/**
- * Retorna una matriz de las filas y columnas dadas, 
- * rellenas de ceros.
- * @param {number} rows 
- * @param {number} columns
- * @returns 
- */
-const emptyMatrix = (rows, columns) => arrayWithLength(rows).map(_ => arrayWithLength(columns));
 
 /**
  * Genera una fila de caja de texto en formato de celdas de tabla.
@@ -87,12 +75,26 @@ function getMatrixFrom(container, rows, columns) {
     return arr;
 }
 
+function renderCell(matrixNumber, row, column) {
+    const element = document.createElement("div");
+    element.innerHTML = `
+        <input type="number" name="cell" data-cell="${matrixNumber}-${row}-${column}" />
+    `;
+    console.log("cell element: ", element.innerHTML);
+    return element;
+}
+
 function renderMatrix() {
     matrixContainer1.innerHTML = "";
     matrixContainer2.innerHTML = "";
-
-    matrixContainer1.append(generateMatrix(1, appState.selectedRows, appState.selectedColumns));
-    matrixContainer2.append(generateMatrix(2, appState.selectedRows, appState.selectedColumns));
+    const { selectedColumns: columns, selectedRows: rows } = appState;
+    const matrix1 = Matrix(rows, columns, (row, col) => renderCell(1, row, col));
+    const matrix2 = Matrix(rows, columns, (row, col) => renderCell(2, row, col));
+    console.log(matrix1);
+    matrixContainer1.append(matrix1);
+    matrixContainer2.append(matrix2);
+    // matrixContainer1.append(generateMatrix(1, appState.selectedRows, appState.selectedColumns));
+    // matrixContainer2.append(generateMatrix(2, appState.selectedRows, appState.selectedColumns));
 }
 
 rowInput.addEventListener("input", () => {
@@ -139,11 +141,19 @@ sendButton.addEventListener("click", async () => {
 
         const { result } = await response.json();
         
-        resultMatrix.innerHTML += '';
+        resultMatrixContainer.innerHTML += '';
+        const resultMatrix = Matrix(result.length, result[0].length, (row, col) => {
+            const cell = document.createElement("div");
+            cell.innerHTML = `
+                <p class="border border-1 m-2 p-2">
+                    ${result[row][col]} 
+                </p>
+            `;
+            return cell;
+        });
+        resultMatrixContainer.append(resultMatrix);
 
-        resultMatrix.append(generateMatrix(1, matrix1Values.length, matrix1Values[0].length));
-
-        const cells = resultMatrix.querySelectorAll("[data-cell]");
+        const cells = resultMatrixContainer.querySelectorAll("[data-cell]");
         console.log(cells);
         for (const cell of cells) {
             const [_, row, column] = cell.getAttribute("data-cell").split('-');
