@@ -3,7 +3,8 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import matrixRouter from './routes/matrix.route.js'
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const FILE_SERVER_PATH = path.join(__dirname, '../public');
