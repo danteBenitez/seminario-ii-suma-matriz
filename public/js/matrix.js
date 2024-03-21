@@ -19,37 +19,35 @@ const appState = {
 const errorDomNode = document.querySelector("#error-message");
 const errorMessage = new ErrorMessage(errorDomNode, { timeout: null });
 
-/**
- * Teclas para las cuales no se debe prevenir el evento por defecto
- * en caso de no ser un número.
- */
-const ALLOWED_NON_NUMERIC_KEYS = [
-  "Backspace",
-  "Tab",
-  "Delete",
-  "ArrowLeft",
-  "ArrowRight",
-  "ArrowUp",
-  "ArrowDown",
-];
-
-rowInput.addEventListener("keydown", (e) => {
-  const number = safeParseNumber(rowInput.value + e.key);
-  if (number == null && !ALLOWED_NON_NUMERIC_KEYS.includes(e.key)) {
+rowInput.addEventListener("input", (e) => {
     e.preventDefault();
-  }
-  appState.selectedRows = number == null ? 0 : number;
+    appState.selectedRows = safeParseInt(rowInput.value + e.key) || 0;
 });
 
-columnInput.addEventListener("keydown", (e) => {
-  const number = safeParseNumber(columnInput.value + e.key);
-  if (number == null && !ALLOWED_NON_NUMERIC_KEYS.includes(e.key)) {
+columnInput.addEventListener("input", (e) => {
     e.preventDefault();
-  }
-  appState.selectedColumns = number == null ? 0 : number;
+    appState.selectedColumns = safeParseInt(columnInput.value + e.key) || 0;
 });
 
 generateMatrixButton.addEventListener("click", () => {
+  if (appState.selectedRows <= 0 || appState.selectedColumns <= 0) {
+    errorMessage.show(`
+            <p class="">
+                Los valores de filas y columnas deben ser mayores a 0
+            </p>
+        `);
+    return;
+  }
+  const rows = safeParseNumber(rowInput.value);
+  const columns = safeParseNumber(columnInput.value);
+  if (rows == null || columns == null) {
+    errorMessage.show(`
+            <p class="">
+                Los valores de filas y columnas deben ser números
+            </p>
+        `);
+    return;
+  }
   renderMatrix();
 });
 
@@ -74,8 +72,7 @@ function getMatrixFrom(container, rows, columns) {
     const [_, row, column] = input.getAttribute("data-cell").split("-");
     let num = safeParseNumber(input.value);
     if (num == null) {
-      num = 0;
-      throw new InvalidMatrixValueError("Un valor ingresado no es un número");
+      throw new InvalidMatrixValueError("Algún valor ingresado no es un número válido");
     }
     arr[parseInt(row)][parseInt(column)] = num;
   }
