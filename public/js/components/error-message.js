@@ -26,4 +26,11 @@ export class ErrorMessage {
             this.domNode.classList.add("d-none");
         }, this.options.timeout);
     }
+
+    /**
+     * Oculta el mensaje de error.
+     */
+    hide() {
+        this.domNode.classList.add("d-none");
+    }
 }

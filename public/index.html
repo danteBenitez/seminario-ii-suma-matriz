@@ -15,7 +15,7 @@
          <h2 class="text-center">Suma</h2>
        </hgroup> 
        <section class="fs-5 p-4">
-        <form class="d-flex">
+        <form class="">
             <fieldset class="w-100 d-flex flex-row gap-2">
                 <div class="w-50">
                     <label for="rows" class="form-label">Ingresa la cantidad de filas: </label>
@@ -26,22 +26,25 @@
                     <input type="number" name="columns" class="form-control" value="10" />
                 </div>
             </fieldset>
+            <div class="d-flex justify-content-center p-5">
+                <button class="btn btn-primary fs-4" type="button" id="generate-matrix-btn">Generar matriz</button>
+            </div>
         </form>
         <article class="d-flex gap-2 p-1">
             <div class="w-50 border border-1 p-3">
                 <h6 class="text-info-emphasis fs-2 text-center">Matriz 1</h6>
-                <div data-id="matrix" class="d-flex justify-content-center"></div>
+                <div data-id="matrix" class="d-flex justify-content-center pb-5"></div>
             </div>
             <div class="w-50 border border-1 p-3">
                 <h6 class="text-info-emphasis fs-2 text-center">Matriz 2</h6>
-                <div data-id="matrix" class="d-flex justify-content-center"></div>
+                <div data-id="matrix" class="d-flex justify-content-center pb-5"></div>
             </div>
         </article>
         <div id="error-message">
         </div>
         <div>
             <div class="d-flex justify-content-center p-5">
-                <button class="btn btn-primary fs-3" id="send-btn">Enviar datos</button>
+                <button class="btn btn-primary fs-4" id="send-btn">Enviar datos</button>
             </div>
         </div>
         <article>
